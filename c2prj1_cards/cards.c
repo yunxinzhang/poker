@@ -102,7 +102,7 @@ card_t card_from_letters(char value_let, char suit_let) {
 
 card_t card_from_num(unsigned c) {
   card_t temp;
-  temp.value = c % 100;
-  temp.suit = c / 100;
+  temp.value = c % 13 + 2;
+  temp.suit = c / 13;
   return temp;
 }

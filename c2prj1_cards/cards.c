@@ -6,7 +6,7 @@
 
 void assert_card_valid(card_t c) {
 	if( c.value < 2 || c.value > 14 || c.suit < 0 || c.suit > 3 )
-		printf("Invaild card!\n");
+		printf("those are not valid values\n");
 }
 
  const char * p0 = "STRAIGHT_FLUSH";

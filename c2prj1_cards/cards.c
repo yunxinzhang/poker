@@ -5,8 +5,12 @@
 
 
 void assert_card_valid(card_t c) {
-	if( c.value < 2 || c.value > 14 || c.suit < 0 || c.suit > 3 )
+	int v = 1;
+	if( c.value < 2 || c.value > 14 || c.suit < 0 || c.suit > 3 ){
+		v = 0;
 		printf("%d , %d those are not valid values\n", c.value, c.suit);
+	}
+	assert(v==1);
 }
 
  const char * p0 = "STRAIGHT_FLUSH";

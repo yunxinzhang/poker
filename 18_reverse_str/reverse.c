@@ -6,11 +6,11 @@ void reverse(char * str) {
   //WRITE ME!
 //  printf(">> %ld\n", sizeof(str));
 //  char * p = str;
-  int cnt = strlen(str);
+  size_t cnt = strlen(str);
 //  int cnt = 0;
 //  while(*p){++cnt;++p;} 
-  char ch;
-  for(int i=0; i<cnt/2; ++i){
+  char ch='\0';
+  for(size_t i=0; i<cnt/2; ++i){
 	ch = str[i];
 	str[i] = str[cnt-i-1];
 	str[cnt-i-1] = ch;

@@ -1,8 +1,10 @@
-Grading at Fri Sep 21 02:58:24 UTC 2018
+Grading at Fri Sep 21 03:02:34 UTC 2018
 Attempting to compile maxSeq.c 
-gcc: error: maxSeq.c: No such file or directory
-gcc: fatal error: no input files
-compilation terminated.
+maxSeq.c: In function ‘maxSeq’:
+maxSeq.c:5:9: error: variable ‘start’ set but not used [-Werror=unused-but-set-variable]
+     int start = 0;
+         ^
+cc1: all warnings being treated as errors
 The code did not compile!
 
 Overall Grade: F

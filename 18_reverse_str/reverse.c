@@ -5,9 +5,10 @@
 void reverse(char * str) {
   //WRITE ME!
 //  printf(">> %ld\n", sizeof(str));
-  char * p = str;
-  int cnt = 0;
-  while(*p){++cnt;++p;} 
+//  char * p = str;
+  int cnt = strlen(str);
+//  int cnt = 0;
+//  while(*p){++cnt;++p;} 
   char ch;
   for(int i=0; i<cnt/2; ++i){
 	ch = str[i];

@@ -5,13 +5,14 @@
 void reverse(char * str) {
   //WRITE ME!
 //  printf(">> %ld\n", sizeof(str));
+  char * p = str;
   int cnt = 0;
-  while(*str){++cnt;++str;} 
+  while(*p){++cnt;++p;} 
   char ch;
   for(int i=0; i<cnt/2; ++i){
-	ch = str[-cnt+i];
-	str[-cnt+i] = str[-i-1];
-	str[-i-1] = ch;
+	ch = str[i];
+	str[i] = str[cnt-i-1];
+	str[cnt-i-1] = ch;
   }
 }
 

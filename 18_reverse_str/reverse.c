@@ -6,6 +6,7 @@ void reverse(char * str) {
   //WRITE ME!
 //  printf(">> %ld\n", sizeof(str));
 //  char * p = str;
+  if(str==NULL)return;
   size_t cnt = strlen(str);
 //  int cnt = 0;
 //  while(*p){++cnt;++p;} 

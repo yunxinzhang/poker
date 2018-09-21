@@ -4,6 +4,15 @@
 
 void reverse(char * str) {
   //WRITE ME!
+//  printf(">> %ld\n", sizeof(str));
+  int cnt = 0;
+  while(*str){++cnt;++str;} 
+  char ch;
+  for(int i=0; i<cnt/2; ++i){
+	ch = str[-cnt+i];
+	str[-cnt+i] = str[-i-1];
+	str[-i-1] = ch;
+  }
 }
 
 int main(void) {

@@ -27,6 +27,7 @@ void shuffle(deck_t * d){
 	d->cards[i] = d->cards[rnd];
 	d->cards[rnd] = cp; 
   }
+  cp = NULL;
 }
 
 void assert_full_deck(deck_t * d) {
@@ -37,8 +38,4 @@ void assert_full_deck(deck_t * d) {
     nc[ind]++;
     if(nc[ind]>1)exit(EXIT_FAILURE);
   }
-
-
-
-  
 }

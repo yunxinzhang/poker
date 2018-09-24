@@ -1,4 +1,4 @@
-Grading at Mon Sep 24 15:57:20 UTC 2018
+Grading at Mon Sep 24 15:59:13 UTC 2018
 Compiling your code
 rm test poker cards.o my-test-main.o *~
 Makefile:10: recipe for target 'clean' failed

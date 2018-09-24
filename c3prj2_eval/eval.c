@@ -11,9 +11,9 @@ int card_ptr_comp(const void * vp1, const void * vp2) {
   else if( (*c1)->value < (*c2)->value ) 
     	return 1;
   else if ( (*c1)->suit > (*c2)->suit)
-	return 1;
-  else if ( (*c1)->suit < (*c2)->suit )
 	return -1;
+  else if ( (*c1)->suit < (*c2)->suit )
+	return 1;
   return 0;
 }
 

@@ -81,7 +81,7 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 	}
      }	
   }
-  }else{
+  }else if(hand->cards[index]->suit==fs){
     
   for( size_t i = index+1; i < hand->n_cards; ++i){
        if(hand->cards[i]->value == lastNum-1 && hand->cards[i]->suit == fs){

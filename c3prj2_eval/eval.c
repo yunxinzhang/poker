@@ -4,28 +4,107 @@
 #include <assert.h>
 
 int card_ptr_comp(const void * vp1, const void * vp2) {
+  const card_t * const * c1 = (const card_t * const *) vp1;
+  const card_t * const * c2 = (const card_t * const *) vp2;
+  if( (*c1)->value > (*c2)->value ) 
+	return -1;
+  else if( (*c1)->value < (*c2)->value ) 
+    	return 1;
+  else if ( (*c1)->suit > (*c2)->value )
+	return -1;
+  else if ( (*c1)->suit < (*c2)->value )
+	return 1;
   return 0;
 }
 
 suit_t flush_suit(deck_t * hand) {
+  int s[4] = {0};
+  for( int i=0; i<hand->n_cards; ++i ){
+    s[hand->cards[i]->suit]++;
+    if(s[hand->cards[i]->suit]==5)
+       return hand->cards[i]->suit;
+  }
  return NUM_SUITS;
 }
 
 unsigned get_largest_element(unsigned * arr, size_t n) {
- return 0;
+  assert(n>0);
+  unsigned max = arr[0];
+  for(size_t i=1; i<n; ++i){
+    if(arr[i]>max){
+ 	max = arr[i];
+    }
+  }
+  return max;
 }
 
 size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
-
- return 0;
+  for(size_t i=0; i<n; ++i){
+    if( match_counts[i] == n_of_akind )
+	return i;
+  }
+ return n+1;
 }
 ssize_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
+  for(size_t i=0; i< hand->n_cards; ++i){
+    if(match_counts[i]==2 && hand->cards[i]->value!=hand->cards[match_idx]->value)
+	return i;
+  }  
   return -1;
+
 }
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  int cont = 1;
+  int lastNum = hand->cards[index]->value;
+  if(fs==4){
+  for( size_t i = index+1; i < hand->n_cards; ++i){
+       if(hand->cards[i]->value == lastNum-1){
+          cont ++;
+	  if(cont == 5)return 1;
+	  lastNum = hand->cards[i]->value;
+       }else if(hand->cards[i]->value < lastNum-1){
+	  break;
+       }
+  }
+  if(index==0 && hand->cards[0]->value == 14){
+     cont = 1;   lastNum = 1;
+     for(size_t i= hand->n_cards-1; i>0; --i){
+	if( hand->cards[i]->value == lastNum+1 ){
+	  cont ++;
+	  if(cont == 5) return -1;
+ 	  lastNum++;
+	} else if( hand->cards[i]->value != lastNum ){
+	  break;
+	}
+     }	
+  }
+  }else{
+    
+  for( size_t i = index+1; i < hand->n_cards; ++i){
+       if(hand->cards[i]->value == lastNum-1 && hand->cards[i]->suit == fs){
+          cont ++;
+	  if(cont == 5)return 1;
+	  lastNum = hand->cards[i]->value;
+       }else if(hand->cards[i]->value < lastNum-1){
+	  break;
+       }
+  }
+  if(index==0 && hand->cards[0]->value == 14){
+     cont = 1;   lastNum = 1;
+     for(size_t i= hand->n_cards-1; i>0; --i){
+	if( hand->cards[i]->value == lastNum+1 && hand->cards[i]->suit == fs){
+	  cont ++;
+	  if(cont == 5) return -1;
+ 	  lastNum++;
+	} else if( hand->cards[i]->value > lastNum+1 ){
+	  break;
+	}
+     }	
+  }
+  }
   return 0;
 }
 
@@ -35,12 +114,34 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 				  size_t idx) {
 
   hand_eval_t ans;
+  for (int i=0; i<n; ++i){
+    ans.cards[i] = hand->cards[idx+i];
+  }
+  size_t j = n;
+  for (int i=0; i<hand->n_cards; ++i){
+    if( i >= idx && i< idx+n )continue;
+    ans.cards[j++] = hand->cards[i];
+    if(j==5)break;
+  }
+  ans.ranking = what;
+
+
   return ans;
 }
 
 
+//int card_ptr_comp(const void * vp1, const void * vp2) 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-
+  qsort(hand1->cards, hand1->n_cards, sizeof(hand1->cards[0]),  card_ptr_comp);
+  qsort(hand2->cards, hand2->n_cards, sizeof(hand2->cards[0]),  card_ptr_comp);
+  hand_eval_t eth1 = evaluate_hand(hand1);
+  hand_eval_t eth2 = evaluate_hand(hand2);
+  if(eth1.ranking > eth2.ranking) return -1;
+  if(eth1.ranking < eth2.ranking) return 1;
+  for(int i=0; i<5; ++i){
+      if(eth1.cards[i]->value > eth2.cards[i]->value)return 1;
+      if(eth1.cards[i]->value < eth2.cards[i]->value)return -1;
+  }   
   return 0;
 }
 
@@ -104,9 +205,11 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
 	  cpind++;
 	  assert(cpind < hand->n_cards);
 	}
+	printf("zyx 1");
 	copy_straight(ans->cards, hand, cpind, fs,4) ;
       }
       else {
+	printf("zyx 2");
 	copy_straight(ans->cards, hand, i, fs,5);
       }
       return 1;

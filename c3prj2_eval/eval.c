@@ -205,11 +205,11 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
 	  cpind++;
 	  assert(cpind < hand->n_cards);
 	}
-	printf("zyx 1");
+//	printf("zyx 1");
 	copy_straight(ans->cards, hand, cpind, fs,4) ;
       }
       else {
-	printf("zyx 2");
+//	printf("zyx 2");
 	copy_straight(ans->cards, hand, i, fs,5);
       }
       return 1;

@@ -1,9 +1,7 @@
-Grading at Mon Sep 24 13:27:45 UTC 2018
+Grading at Mon Sep 24 13:29:53 UTC 2018
 Compiling your code
 rm test poker cards.o my-test-main.o *~
 Makefile:10: recipe for target 'clean' failed
-cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o deck.o deck.c
-cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o eval.o eval.c
 cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o cards.o cards.c
 gcc -o test-eval -ggdb3 deck.o deck-c4.o eval-c4.o eval.o test-eval.o cards.o input.o future.o
 Testcase 1: Trying hands with nothing

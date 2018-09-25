@@ -23,8 +23,11 @@ void decrypt(FILE * fp){
 		++chs[idx];
   }
 //  printf("\n");
-  
-  fprintf(stdout, "%d", max_num(chs, 26)-4);
+  int mx = max_num(chs,26);
+  int key;
+  if(mx>=4) key = mx-4;   
+  if(mx<4)  key = mx-4+26;
+  fprintf(stdout, "%d", key);
   fprintf(stdout, "\n");
 }
 

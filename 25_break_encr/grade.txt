@@ -1,15 +1,15 @@
-Grading at Tue Sep 25 05:43:41 UTC 2018
+Grading at Tue Sep 25 06:04:36 UTC 2018
 Attempting to compile breaker.c 
 gcc -o breaker -std=gnu99 -Wall -Werror decrypt.c
 testcase1 passed
 #################################################
 testcase2:
-testcase2 failed
+testcase2 passed
 #################################################
 testcase3:
 testcase3 failed
 #################################################
 testcase4:
-testcase4 failed
+testcase4 passed
 
-Overall Grade: F
+Overall Grade: C

@@ -24,7 +24,7 @@ void decrypt(FILE * fp){
   }
 //  printf("\n");
   
-  fprintf(stdout, "%d", max_num(chs, 26));
+  fprintf(stdout, "%d", max_num(chs, 26)-4);
   fprintf(stdout, "\n");
 }
 

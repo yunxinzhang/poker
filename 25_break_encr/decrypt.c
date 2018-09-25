@@ -17,19 +17,21 @@ void decrypt(FILE * fp){
   int chs[26] = {0};
   size_t idx = 0;
   while( (c = fgetc(fp))!=EOF){
-	idx = c - 'a';
+ 	printf("%c", c);
+   	idx = c - 'a';
 	if(idx>=0 && idx<26)
-		++chs[c-'a'];
+		++chs[idx];
   }
+  printf("\n");
   printf("%d\n", max_num(chs, 26));
 }
 
 int main(int argc, char ** argv){
-  if(argc!=2){
+  if(argc<2){
 	fprintf(stderr, "Usage: break inputFileName\n");
 	return EXIT_FAILURE;
   }
-
+  printf("%s\n", argv[1]);
   FILE * fp = fopen(argv[1], "r");
   if(fp==NULL){
 	perror("Could not open file!");

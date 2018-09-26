@@ -62,7 +62,10 @@ int main(int argc, char ** argv) {
   else{
 	for(int i=1; i<argc; ++i){
 		FILE *fp = fopen(argv[i], "r");
-		if(fp==NULL)exit(EXIT_FAILURE);
+		if(fp==NULL){
+			perror("Open file failed");
+			exit(EXIT_FAILURE);
+		}
 		copyStr(strs, fp, sz, ssz);
 		int  fc = fclose(fp);
  		if(fc!=0){

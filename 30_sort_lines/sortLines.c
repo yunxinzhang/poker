@@ -8,7 +8,6 @@
 //to modify it.
 int stringOrder(const void * vp1, const void * vp2) {
   const char * const * p1 = vp1;
-
   const char * const * p2 = vp2;
   return strcmp(*p1, *p2);
 }
@@ -28,7 +27,7 @@ void copyStr(char ** strs, FILE * fp, size_t sz, size_t ssz){
 		strs[i] = realloc(strs[i], (j+10)*sizeof(**strs));
 		strs[i][j++] = c;	
 		if(c=='\n'){
-			strs[i][j]='\0';
+			strs[i][j-1]='\0';
 			++i; 
 			j=0;
 			if(i>=sz) {
@@ -42,7 +41,8 @@ void copyStr(char ** strs, FILE * fp, size_t sz, size_t ssz){
 	}
 	sortData(strs, i+1);
   for(int i=0; i<sz; ++i){
-	printf("%s", strs[i]);
+	if(strlen(strs[i])>0)
+	printf("%s\n", strs[i]);
   }
 	for(int i=0; i<sz; ++i) free(strs[i]);
 	free(strs);

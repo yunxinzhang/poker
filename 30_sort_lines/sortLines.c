@@ -39,6 +39,7 @@ void copyStr(char ** strs, FILE * fp, size_t sz, size_t ssz){
 			}
 		}
 	}
+	sortData(strs, i+1);
   for(int i=0; i<sz; ++i){
 	printf("%s", strs[i]);
   }

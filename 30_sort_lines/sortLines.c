@@ -21,13 +21,14 @@ void copyStr(char ** strs, FILE * fp, size_t sz, size_t ssz){
 	strs = malloc(sz * sizeof(*strs)); 
  	for(int i=0; i<sz; ++i){
 		strs[i] = malloc( ssz * sizeof(**strs));
+		strs[i][0] = '\0';
 	}	
 	int i=0, j=0;
 	while( (c = getc(fp))!= EOF ){
 		strs[i] = realloc(strs[i], (j+10)*sizeof(**strs));
-		strs[i][j++] = c;	
 		if(c=='\n'){
-			strs[i][j-1]='\0';
+			if(j>0)
+				strs[i][j]='\0';
 			++i; 
 			j=0;
 			if(i>=sz) {
@@ -35,9 +36,12 @@ void copyStr(char ** strs, FILE * fp, size_t sz, size_t ssz){
 				strs = realloc(strs, sz*sizeof(*strs));
 				for(int k=0; k<sz/2; ++k){
 					strs[sz/2+k] = malloc(ssz * sizeof(**strs));
+					strs[sz/2+k][0]='\0';
 				}
 			}
+			continue;
 		}
+		strs[i][j++] = c;
 	}
 	sortData(strs, i+1);
   for(int i=0; i<sz; ++i){

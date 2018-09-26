@@ -22,7 +22,7 @@ void encrypt(FILE * f, int key, FILE * outfile){
     }
     fprintf(outfile, "%s", line);
   }
-//  free(line);
+  free(line);
 }
 
 

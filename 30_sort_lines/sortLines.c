@@ -8,6 +8,7 @@
 //to modify it.
 int stringOrder(const void * vp1, const void * vp2) {
   const char * const * p1 = vp1;
+
   const char * const * p2 = vp2;
   return strcmp(*p1, *p2);
 }

@@ -1,0 +1,8 @@
+Grading at Wed Sep 26 04:02:07 UTC 2018
+Attempting to compile rotateMatrix.c
+/tmp/ccPJ5Dmd.o: In function `main':
+rotateMatrix.c:(.text+0x16d): undefined reference to `rotate'
+collect2: error: ld returned 1 exit status
+The code did not compile!
+
+Overall Grade: F

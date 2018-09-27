@@ -40,6 +40,7 @@ kvarray_t * readKVs(const char * fname) {
 	perror("Close file failed!");
  	exit(EXIT_FAILURE);
   }
+  free(line);
   return arrp;
 }
 

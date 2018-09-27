@@ -32,7 +32,8 @@ void printCounts(counts_t * c, FILE * outFile) {
   for(int i=0; i<c->sz; ++i){
 	fprintf(outFile, "%s: %d\n", c->cnts[i].name, c->cnts[i].cname);
   }
-  fprintf(outFile, "<unknown> : %d\n", c->undef);
+  if(c->undef>0)
+  	fprintf(outFile, "<unknown> : %d\n", c->undef);
 }
 
 void freeCounts(counts_t * c) {

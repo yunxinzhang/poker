@@ -57,6 +57,12 @@ board_t * makeBoard(int w, int h, int numMines) {
   for(int i=0; i<numMines; ++i){
 	addRandomMine(bd);
   }
+  for(int i=0; i<h; ++i){
+	for(int j=0; j<w; ++j){
+		printf("%4d" , bd->board[i][j]);
+	}
+	printf("\n");
+  }
   return bd;
 }
 void printBoard(board_t * b) {    
@@ -114,8 +120,8 @@ int countMines(board_t * b, int x, int y) {
   int n = 0;
   for(int i=-1; i<2; ++i){
 	for(int j=-1; j<2; ++j){
-		if((x+i)<0 || (y+j)<0 ||(x==0&&y==0))continue;
-		if(IS_MINE(b->board[x+i][y+j]))++n;
+		if((x+i)<0 || (y+j)<0 ||(i==0&&j==0)||(x+i)>=b->width ||(y+j)>=b->height)continue;
+		if(IS_MINE(b->board[y+j][x+i]))++n;
 	}
   }
   return n;

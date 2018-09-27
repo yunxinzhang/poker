@@ -57,12 +57,14 @@ board_t * makeBoard(int w, int h, int numMines) {
   for(int i=0; i<numMines; ++i){
 	addRandomMine(bd);
   }
+/*
   for(int i=0; i<h; ++i){
 	for(int j=0; j<w; ++j){
 		printf("%4d" , bd->board[i][j]);
 	}
 	printf("\n");
   }
+*/
   return bd;
 }
 void printBoard(board_t * b) {    

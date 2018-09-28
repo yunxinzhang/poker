@@ -53,7 +53,7 @@ void add_card_to(deck_t * deck, card_t c){
   deck->cards[deck->n_cards] = malloc(sizeof( *(deck->cards[deck->n_cards])));
   *(deck->cards[deck->n_cards]) = c;
   ++(deck->n_cards);
-};
+}
 
 card_t * add_empty_card(deck_t * deck){
   card_t c = {.suit=0, .value=0};

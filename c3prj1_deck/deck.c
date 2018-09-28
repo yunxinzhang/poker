@@ -103,4 +103,4 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands){
 		}
 	}
 	return make_deck_exclude(ex);
-} ;
+} 

@@ -1,0 +1,15 @@
+Grading at Fri Sep 28 07:20:56 UTC 2018
+Compiling deck.c -> deck.o
+deck.c:56:2: error: ISO C does not allow extra ‘;’ outside of a function [-Werror=pedantic]
+ };
+  ^
+deck.c:92:3: error: ISO C does not allow extra ‘;’ outside of a function [-Werror=pedantic]
+ } ;
+   ^
+deck.c:106:3: error: ISO C does not allow extra ‘;’ outside of a function [-Werror=pedantic]
+ } ;
+   ^
+cc1: all warnings being treated as errors
+Compilation of deck.c failed
+
+Overall Grade: F

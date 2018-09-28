@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
 int card_ptr_comp(const void * vp1, const void * vp2) {
   const card_t * const * c1 = (const card_t * const *) vp1;
   const card_t * const * c2 = (const card_t * const *) vp2;
@@ -145,14 +144,30 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
   return 0;
 }
 
-
-
+int mypow(int e ,unsigned n){
+ 	int re = 1;
+	for(unsigned i=0; i<n; ++i){
+		re *= e;
+	}
+	return re;
+}
 //You will write this function in Course 4.
 //For now, we leave a prototype (and provide our
 //implementation in eval-c4.o) so that the
 //other functions we have provided can make
 //use of get_match_counts.
-unsigned * get_match_counts(deck_t * hand) ;
+unsigned * get_match_counts(deck_t * hand){
+	size_t sz = hand->n_cards;
+	unsigned * res = malloc(sz * sizeof(*res));
+ 	int forsave = 0;
+	for(int i=0; i<sz; ++i){
+		forsave += mypow(5, hand->cards[i]->value-2);
+	}
+	for(int i=0; i<sz; ++i){
+		res[i] = (forsave /mypow(5, hand->cards[i]->value-2))%5;
+	}
+	return res;
+} 
 
 // We provide the below functions.  You do NOT need to modify them
 // In fact, you should not modify them!

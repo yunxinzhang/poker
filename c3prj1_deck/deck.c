@@ -46,3 +46,61 @@ void assert_full_deck(deck_t * d) {
     }
   }
 }
+
+void add_card_to(deck_t * deck, card_t c){
+  assert(deck != NULL);
+  deck->cards = realloc( deck->cards, (deck->n_cards+1) *sizeof(*(deck->cards)));  
+  deck->cards[deck->n_cards] = malloc(sizeof( *(deck->cards[deck->n_cards])));
+  *(deck->cards[deck->n_cards]) = c;
+  ++(deck->n_cards);
+};
+
+card_t * add_empty_card(deck_t * deck){
+  card_t c = {.suit=0, .value=0};
+  add_card_to(deck, c);
+  return deck->cards[deck->n_cards-1];
+}
+
+deck_t * make_deck_exclude(deck_t * excluded_cards){
+	int sz = 52 - excluded_cards->n_cards;
+//	printf("sz = %d\n", sz);
+	deck_t * dk = malloc(sizeof(deck_t));
+	dk->n_cards = 0;
+//	printf("%ld\n", sz*sizeof(excluded_cards));
+	dk->cards = malloc(sz *sizeof( excluded_cards ));
+	for(size_t i=0; i<52; ++i){
+		card_t ci = card_from_num(i);
+		if(deck_contains(excluded_cards, ci))continue;
+//		assert(dk->n_cards < sz);
+//		printf("%ld\n", dk->n_cards);
+		dk->cards[dk->n_cards] = malloc(sizeof(card_t));
+		*(dk->cards[dk->n_cards++]) = ci;
+//		printf("%ld\n", dk->n_cards);
+   	}	
+//       	printf("make_dekc");
+	printf("sz>>%d -- %ld\n", sz, dk->n_cards);
+// Has the same cards ,, not allowed.
+	assert(dk->n_cards == sz);
+	return dk;
+}
+void free_deck(deck_t * deck){
+	for(size_t i=0; i<deck->n_cards; ++i){
+		free(deck->cards[i]);
+	}
+	free(deck->cards);
+	free(deck);
+} ;
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands){
+	deck_t * ex = malloc(sizeof(deck_t));
+	ex->cards = NULL;
+	ex->n_cards = 0;
+	for(size_t i=0; i<n_hands; ++i){
+		for(size_t j=0; j<hands[i]->n_cards; ++j){
+			if(hands[i]->cards[j]->suit==0 && hands[i]->cards[j]->value==0){
+		perror("deck contain ?"); exit(EXIT_FAILURE);
+      }
+			add_card_to(ex, *( hands[i]->cards[j]));
+		}
+	}
+	return make_deck_exclude(ex);
+} ;

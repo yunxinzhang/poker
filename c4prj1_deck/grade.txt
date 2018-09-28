@@ -1,9 +1,83 @@
-Grading at Fri Sep 28 07:26:27 UTC 2018
+Grading at Fri Sep 28 07:27:39 UTC 2018
 Compiling deck.c -> deck.o
-deck.c:106:3: error: ISO C does not allow extra ‘;’ outside of a function [-Werror=pedantic]
- } ;
-   ^
-cc1: all warnings being treated as errors
-Compilation of deck.c failed
+Compiling eval.c -> eval.o
+Compiling cards.c -> cards.o
+Linking eval.o, deck.o, cards.o, and our tester
+Testing free_deck(deck_t *)
+- Test passed
+Testing add_card_to(deck_t *, card_t)
+- Test passed
+Testing add_empty_card(deck_t *)
+- Test passed
+Testing make_deck_exclude(deck_t *)
+sz>>52 -- 52
+sz>>51 -- 51
+sz>>50 -- 50
+sz>>49 -- 49
+sz>>48 -- 48
+sz>>47 -- 47
+sz>>46 -- 46
+sz>>45 -- 45
+sz>>44 -- 44
+sz>>43 -- 43
+sz>>42 -- 42
+sz>>41 -- 41
+sz>>40 -- 40
+sz>>39 -- 39
+sz>>38 -- 38
+sz>>37 -- 37
+- Test passed
+Testing build_remaining_deck(deck_t **, size_t)
+Testing with 1 hand
+sz>>51 -- 51
+sz>>50 -- 50
+sz>>49 -- 49
+sz>>48 -- 48
+sz>>47 -- 47
+sz>>46 -- 46
+sz>>45 -- 45
+sz>>44 -- 44
+Testing with 2 hands
+sz>>43 -- 43
+sz>>42 -- 42
+sz>>41 -- 41
+sz>>40 -- 40
+sz>>39 -- 39
+sz>>38 -- 38
+sz>>37 -- 37
+sz>>36 -- 36
+Testing with 3 hands
+sz>>35 -- 35
+sz>>34 -- 34
+sz>>33 -- 33
+sz>>32 -- 32
+sz>>31 -- 31
+sz>>30 -- 30
+sz>>29 -- 29
+sz>>28 -- 28
+Testing with 4 hands
+sz>>27 -- 27
+sz>>26 -- 26
+sz>>25 -- 25
+sz>>24 -- 24
+sz>>23 -- 23
+sz>>22 -- 22
+sz>>21 -- 21
+sz>>20 -- 20
+Testing with 5 hands
+sz>>19 -- 19
+sz>>18 -- 18
+sz>>17 -- 17
+sz>>16 -- 16
+sz>>15 -- 15
+sz>>14 -- 14
+sz>>13 -- 13
+sz>>12 -- 12
+Testing with 6 hands
+sz>>11 -- 11
+sz>>10 -- 10
+- Test passed
+Testing get_match_count(deck_t *)
+- Test passed
 
-Overall Grade: F
+Overall Grade: A

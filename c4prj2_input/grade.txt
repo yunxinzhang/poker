@@ -1,0 +1,11 @@
+Grading at Sat Sep 29 08:47:07 UTC 2018
+Compiling cards.c -> cards.o
+Compiling deck.c -> deck.o
+Compiling input.c -> input.o
+input.c:60:2: error: ISO C does not allow extra ‘;’ outside of a function [-Werror=pedantic]
+ };
+  ^
+cc1: all warnings being treated as errors
+Compilation of input.c failed
+
+Overall Grade: F

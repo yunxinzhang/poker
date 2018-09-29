@@ -62,25 +62,33 @@ card_t * add_empty_card(deck_t * deck){
 }
 
 deck_t * make_deck_exclude(deck_t * excluded_cards){
-	int sz = 52 - excluded_cards->n_cards;
+	int sz = 52 - excluded_cards->n_cards; // excluded_cards 有重复的牌
 //	printf("sz = %d\n", sz);
 	deck_t * dk = malloc(sizeof(deck_t));
 	dk->n_cards = 0;
 //	printf("%ld\n", sz*sizeof(excluded_cards));
 	dk->cards = malloc(sz *sizeof( excluded_cards ));
+	//printf("---ss---------------------make_deck_exclude\n");
 	for(size_t i=0; i<52; ++i){
 		card_t ci = card_from_num(i);
 		if(deck_contains(excluded_cards, ci))continue;
 //		assert(dk->n_cards < sz);
 //		printf("%ld\n", dk->n_cards);
+		if(dk->n_cards>=sz)
+			dk->cards = realloc(dk->cards, (dk->n_cards+1)*sizeof(excluded_cards));
 		dk->cards[dk->n_cards] = malloc(sizeof(card_t));
+		//printf("%d %d\n", ci.value, ci.suit);
 		*(dk->cards[dk->n_cards++]) = ci;
+		assert(ci.value!=0 || ci.suit!=0);
+		assert(ci.value<15 && ci.value>=2);
 //		printf("%ld\n", dk->n_cards);
    	}	
 //       	printf("make_dekc");
-	printf("sz>>%d -- %ld\n", sz, dk->n_cards);
+//	printf("sz>>%d -- %ld\n", sz, dk->n_cards);
 // Has the same cards ,, not allowed.
-	assert(dk->n_cards == sz);
+//	assert(dk->n_cards == sz);
+	//printf("--getde-----------------------make_deck_exclude\n");
+	//print_hand(dk);printf("\n");
 	return dk;
 }
 void free_deck(deck_t * deck){
@@ -91,16 +99,22 @@ void free_deck(deck_t * deck){
 	free(deck);
 } 
 deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands){
+	//printf("-------------------------build_remaint_deck\n");
 	deck_t * ex = malloc(sizeof(deck_t));
 	ex->cards = NULL;
 	ex->n_cards = 0;
+	//printf("-------------------------build_remaint_deck\n");
 	for(size_t i=0; i<n_hands; ++i){
 		for(size_t j=0; j<hands[i]->n_cards; ++j){
 			if(hands[i]->cards[j]->suit==0 && hands[i]->cards[j]->value==0){
-		perror("deck contain ?"); exit(EXIT_FAILURE);
+//		perror("deck contain ?"); exit(EXIT_FAILURE);
+		continue;
       }
 			add_card_to(ex, *( hands[i]->cards[j]));
 		}
 	}
+	//printf("-------------------------build_remaint_deck\n");
+//	print_hand(ex);printf("\n");
+//	print_hand(make_deck_exclude(ex));printf("\n");
 	return make_deck_exclude(ex);
 } 

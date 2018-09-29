@@ -131,6 +131,9 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 
 //int card_ptr_comp(const void * vp1, const void * vp2) 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
+	//printf("compare_hand :\n");
+	//print_hand(hand1);printf("\n");
+	//print_hand(hand2);printf("\n");
   qsort(hand1->cards, hand1->n_cards, sizeof(hand1->cards[0]),  card_ptr_comp);
   qsort(hand2->cards, hand2->n_cards, sizeof(hand2->cards[0]),  card_ptr_comp);
   hand_eval_t eth1 = evaluate_hand(hand1);
@@ -157,15 +160,22 @@ int mypow(int e ,unsigned n){
 //other functions we have provided can make
 //use of get_match_counts.
 unsigned * get_match_counts(deck_t * hand){
+//	print_hand(hand);
 	size_t sz = hand->n_cards;
 	unsigned * res = malloc(sz * sizeof(*res));
- 	int forsave = 0;
+ 	int forsave = 0; int zeron = 0;
 	for(int i=0; i<sz; ++i){
-		forsave += mypow(5, hand->cards[i]->value-2);
+		if(hand->cards[i]->value!=0)
+			forsave += mypow(5, hand->cards[i]->value-2);
+		else
+			++zeron;
 	}
 	for(int i=0; i<sz; ++i){
-		res[i] = (forsave /mypow(5, hand->cards[i]->value-2))%5;
-	}
+		if(hand->cards[i]->value!=0)
+			res[i] = (forsave /mypow(5, hand->cards[i]->value-2))%5;
+		else
+			res[i] = zeron; 
+	}		
 	return res;
 } 
 
@@ -238,6 +248,8 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
 //This function is longer than we generally like to make functions,
 //and is thus not so great for readability :(
 hand_eval_t evaluate_hand(deck_t * hand) {
+//	printf("evaluate_hand :\n");
+//	print_hand(hand);printf("\n");
   suit_t fs = flush_suit(hand);
   hand_eval_t ans;
   if (fs != NUM_SUITS) {
@@ -248,6 +260,7 @@ hand_eval_t evaluate_hand(deck_t * hand) {
   }
   unsigned * match_counts = get_match_counts(hand);
   unsigned n_of_a_kind = get_largest_element(match_counts, hand->n_cards);
+  //printf("\nmc %d\n", n_of_a_kind);
   assert(n_of_a_kind <= 4);
   size_t match_idx = get_match_index(match_counts, hand->n_cards, n_of_a_kind);
   ssize_t other_pair_idx = find_secondary_pair(hand, match_counts, match_idx);

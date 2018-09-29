@@ -63,7 +63,7 @@ int main(int argc, char ** argv) {
 		cnt_wins[idx_max]++;
    }	
    for(int i=0; i<n_hands; ++i){
-	printf("Hand %d won %u / %u times (%.2f%%)\n", i, cnt_wins[i], mn, 1.0*cnt_wins[i]/mn);
+	printf("Hand %d won %u / %u times (%.2f%%)\n", i, cnt_wins[i], mn, 100.0*cnt_wins[i]/mn);
    }
 
    printf("And there were %u ties\n", cnt_wins[n_hands]);

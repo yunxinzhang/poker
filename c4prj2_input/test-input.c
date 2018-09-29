@@ -22,6 +22,7 @@ void disp(future_cards_t f){
   printf("%ld deck\n", f.n_decks);
   for(int i=0; i<f.n_decks; ++i){
 	for(int j=0; j<f.decks[i].n_cards; ++j){
+		printf("%ld\n", f.decks[i].n_cards);
 		printf("%2d-%2d ; ", f.decks[i].cards[j]->value, f.decks[i].cards[j]->suit); 
 	}
 	printf("\n");
@@ -40,7 +41,7 @@ int main(){
    size_t n_hands=0;
    printf("read start");
  deck_t ** allhand =   read_input(f, &n_hands, &fcp);
-   disp(fcp); 
+   //disp(fcp); 
    for(int i=0; i<n_hands; ++i){
 	print_hand(allhand[i]);
 	printf("\n");

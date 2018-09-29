@@ -39,23 +39,22 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc){
 	size_t sz = 0;
 	deck_t ** dpp = NULL;
 	size_t cnt_hand = 0;
-	assert(fc!=NULL);
-	if(fc == NULL){
-		fc = malloc(sizeof(future_cards_t));
-		fc->n_decks = 0;
-		fc->decks = NULL;
-	}
-   //printf("getline start");
+	assert(fc!=NULL && fc->n_decks==0);
 	while( getline(&line, &sz, f)!=-1){
 		if(strlen(line) > 13){
 			fc->n_decks++;
 			fc->decks = realloc(fc->decks, fc->n_decks * sizeof(deck_t));
+			//printf("%ld <<ndecks<<< %ld\n", fc->n_decks, sizeof(deck_t));
 			fc->decks[fc->n_decks-1].n_cards=0;
 			fc->decks[fc->n_decks-1].cards=NULL;
-   //printf("hand start");
+			//printf("\n--------2-------\n");
 			deck_t *dp = hand_from_string(line, fc);
 			cnt_hand++;
+			//printf("\n--------3-------\n");
+			
 			dpp = realloc(dpp, cnt_hand * sizeof(f)); // size of memeryo;
+			//printf("%ld <<nhand<<< %ld\n", cnt_hand, sizeof(f));
+			//printf("\n--------4-------\n");
 			dpp[cnt_hand-1] = dp;
 		}
 	}

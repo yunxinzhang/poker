@@ -57,5 +57,5 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc){
 	}
 	*n_hands = cnt_hand;
 	return dpp;
-};
+}
 

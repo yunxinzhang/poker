@@ -14,7 +14,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
 			//printf("%c\n", str[i+1]);
 			assert(str[i+1]=='s' || str[i+1] =='d' || str[i+1] =='h' ||str[i+1]=='c');
 			add_card_to(dt, card_from_letters(str[i],str[i+1]));
-		
+			++i;	
 		}else{
 			card_t *cp = add_empty_card(dt);
 			assert(i+1<strlen(str));
@@ -23,9 +23,9 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc){
 			}else if(i+2<strlen(str)&&str[i+2]<'9' &&str[i+2]>'0') {
 				add_future_card(fc, atoi(&str[i+1])*10+atoi(&str[i+2]), cp);	
 			}
-			
+			i+=2;		
 		}
-		++i;
+	
 	}
   }
   return dt;

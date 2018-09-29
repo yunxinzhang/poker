@@ -46,12 +46,18 @@ int main(){
 	print_hand(allhand[i]);
 	printf("\n");
    }
-  card_t c[5];
+  card_t c[11];
   c[1].value = 4; c[1].suit = 0;
   c[2].value = 5; c[2].suit = 1;
   c[3].value = 5; c[3].suit = 2;
   c[4].value = 6; c[4].suit = 3;
   c[0].value = 3; c[0].suit = 1;
+  c[5].value = 7; c[5].suit = 1;
+  c[6].value = 8; c[6].suit = 3;
+  c[7].value = 4; c[7].suit = 2;
+  c[8].value = 9; c[8].suit = 3;
+  c[9].value = 10; c[9].suit = 2;
+  c[10].value = 10; c[10].suit = 1;
   deck_t  dk ;
   dk.n_cards = 0;
   dk.cards = NULL;
@@ -60,6 +66,15 @@ int main(){
   add_card_to(&dk, c[2]);
   add_card_to(&dk, c[3]);
   add_card_to(&dk, c[4]);
+  add_card_to(&dk, c[5]);
+  add_card_to(&dk, c[6]);
+  add_card_to(&dk, c[7]);
+  add_card_to(&dk, c[8]);
+  add_card_to(&dk, c[9]);
+  add_card_to(&dk, c[10]);
+  for(int i=0; i<dk.n_cards; ++i){
+	printf("%p-------dk\n", dk.cards[i]);
+  }
    future_cards_from_deck(&dk, &fcp);
    for(int i=0; i<n_hands; ++i){
 	print_hand(allhand[i]);

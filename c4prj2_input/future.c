@@ -31,6 +31,8 @@ void future_cards_from_deck(deck_t * deck, future_cards_t * fc){
    	for(int i=0; i<fc->n_decks; ++i){
 	  for(int j=0; j<fc->decks[i].n_cards; ++j){
 	 	if(fc->decks[i].cards[j] != NULL){
+			//printf("%d ----  %p\n", j, deck->cards[j]);
+			assert(deck->cards[j]!=NULL);
 			*(fc->decks[i].cards[j]) = *(deck->cards[j]);
 		} 
 	 }

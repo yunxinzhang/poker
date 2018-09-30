@@ -8,24 +8,34 @@
 #include "future.h"
 #include "input.h"
 #include <string.h>
-
+int getNum(int n){
+	int k = 1;
+	for(int i=0; i<n; ++i){
+		k *= 10;
+	}
+	return k;
+}
 int main(int argc, char ** argv) {
   //YOUR CODE GOES HERE
-  int mn;
+  int mn=0;
   if(argc==2){
 	mn = 10000;
   }else if(argc==3){
+//	printf("%s  %ld\n", argv[2], strlen(argv[2]));
 	for(int i=0; i<strlen(argv[2]); ++i){
 		if(argv[2][i]>'9' || argv[2][i] <'0'){
 			perror("not a number");
 			exit(EXIT_FAILURE);
 		}
+//		printf( "%d %d %d\n", mn, getNum(i), argv[2][i]-'0');
+	        mn += (argv[2][i]-'0')* getNum(strlen(argv[2])-1-i);
 	}
-	mn = atoi((const char*) &argv[2] );
+	
   }else{
 	perror("wrong args");
 	exit(EXIT_FAILURE);
   }
+//	printf("%d \n ", mn);
 // read_input 
    FILE *f = fopen(argv[1], "r");
    if(f==NULL){
@@ -42,6 +52,7 @@ int main(int argc, char ** argv) {
    deck_t * remain = build_remaining_deck(allhand,n_hands);
    int * cnt_wins = malloc( (n_hands+1) * sizeof(int));
    for(int i=0; i<= n_hands; ++i) cnt_wins[i] = 0;
+//	printf("%d \n ", mn);
    for(int i=0; i<mn; ++i){
 	shuffle(remain);
 	future_cards_from_deck(remain, &fcp);
